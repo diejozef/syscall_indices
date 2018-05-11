@@ -23,6 +23,9 @@ namespace sysidx
 
 	auto get_exports(std::uintptr_t module_base, std::vector<export_entry_t>& out_exports) -> void
 	{
+		if (!module_base)
+			return;
+
 		auto dos = reinterpret_cast<PIMAGE_DOS_HEADER>(module_base);
 		auto nt_headers = reinterpret_cast<PIMAGE_NT_HEADERS>(module_base + dos->e_lfanew);
 
